@@ -1,0 +1,2 @@
+make s:
+	rojo serve

@@ -1,0 +1,72 @@
+{
+    "name": "RojoProject",
+    "tree": {
+        "$className": "DataModel",
+
+        "ReplicatedStorage": {
+            "$className": "ReplicatedStorage",
+            "$ignoreUnknownInstances": true,
+            "$path": "src/Shared"
+        },
+
+
+        "ServerScriptService": {
+            "$className": "ServerScriptService",
+            "$ignoreUnknownInstances": true,
+            "$path": "src/Server"
+        },
+
+        "StarterPlayer": {
+            "$className": "StarterPlayer",
+            "$ignoreUnknownInstances": true,
+            "StarterPlayerScripts": {
+                "$className": "StarterPlayerScripts",
+                "$path": "src/Client/PlayerScripts",
+                "$ignoreUnknownInstances": true
+            }
+        },
+
+        "ServerStorage": {
+            "$className": "ServerStorage",
+            "$path": "src/Storage",
+            "$ignoreUnknownInstances": true
+        },
+
+        "Workspace": {
+            "$ignoreUnknownInstances": true,
+            "$className": "Workspace",
+            "$properties": {
+                "FilteringEnabled": true
+            }
+        },
+
+        "Lighting": {
+            "$className": "Lighting",
+            "$properties": {
+                "Ambient": [
+                    0,
+                    0,
+                    0
+                ],
+                "Brightness": 2,
+                "GlobalShadows": true,
+                "Outlines": false,
+                "Technology": "Voxel"
+            }
+        },
+
+        "SoundService": {
+            "$className": "SoundService",
+            "$properties": {
+                "RespectFilteringEnabled": true
+            }
+        },
+
+        "HttpService": {
+            "$className": "HttpService",
+            "$properties": {
+                "HttpEnabled": true
+            }
+        }
+    }
+}

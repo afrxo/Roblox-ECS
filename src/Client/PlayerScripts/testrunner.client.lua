@@ -39,7 +39,7 @@ end))
 -- Loading our keybinds into the keybind system to avoid any weird behaviours
 keybindsystem:load(PlayerEntity)
 
--- Here we are updating our player entity before every frame for smooth camera movement
+-- Here we are updating our player entity every frame for smooth camera movement
 RunService.RenderStepped:Connect(function(step)
 	camerasystem:update(step, PlayerEntity)
 end)

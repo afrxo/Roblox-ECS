@@ -8,9 +8,9 @@ local keybindsystem = {
 -- loading in entities with keybinds into the keybind system
 function keybindsystem:Load(entity)
   -- sice we have a keybind component, we can query that
-  local keybind = entity:get('keybind')
+  local keybind = entity:GetComponent('keybind')
   -- we can also query our states to determine if binds are loaded
-  local states = entity:get('state')
+  local states = entity:GetComponent('state')
   table.insert(self.bindings, keybind)
   states.bindingsloaded = true
 end

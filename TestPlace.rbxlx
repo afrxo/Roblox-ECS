@@ -616,13 +616,13 @@ gcLgc4RKxr21zq2UlJSM]]></BinaryString>
 				<int64 name="SourceAssetId">-1</int64>
 				<BinaryString name="Tags"></BinaryString>
 			</Properties>
-			<Item class="LocalScript" referent="RBX5ee0d80dbeb24c9f8fbf953118886a8d">
+			<Item class="LocalScript" referent="RBXad5eafa880dc4ba4aa94269d3382b0cf">
 				<Properties>
 					<BinaryString name="AttributesSerialize"></BinaryString>
 					<bool name="Disabled">false</bool>
 					<Content name="LinkedSource"><null></null></Content>
-					<string name="Name">testrunner</string>
-					<string name="ScriptGuid">{fbb85247-7cd5-46aa-8a4e-bafff7f52e88}</string>
+					<string name="Name">world</string>
+					<string name="ScriptGuid">{de9c378a-be7e-40fd-a025-18cb2af29b56}</string>
 					<ProtectedString name="Source"><![CDATA[local Player = game:GetService("Players").LocalPlayer
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local RunService = game:GetService("RunService")
@@ -647,26 +647,26 @@ local PlayerEntity = entity.new()
 
 -- Here we are adding the player component to the player entity
 -- the player component stores information about the player
-PlayerEntity:add(playerComponent.new(Player))
+PlayerEntity:AddComponent(playerComponent.new(Player))
 
 -- Here we are adding a  stateful-component to the player entity
-PlayerEntity:add(stateComponent.new())
+PlayerEntity:AddComponent(stateComponent.new())
 
 -- Here we are binding creating keybinds
-PlayerEntity:add(keybindComponent.new(Enum.KeyCode.E, function()
+PlayerEntity:AddComponent(keybindComponent.new(Enum.KeyCode.E, function()
   -- we can simply query our player state since by using PlayerEntity:get('state')
   -- and change the state
 
-	local state = PlayerEntity:get("state")
+	local state = PlayerEntity:GetComponent("state")
 	state.inCamMode = not state.inCamMode
 end))
 
 -- Loading our keybinds into the keybind system to avoid any weird behaviours
-keybindsystem:load(PlayerEntity)
+keybindsystem:Load(PlayerEntity)
 
--- Here we are updating our player entity before every frame for smooth camera movement
+-- Here we are updating our player entity every frame for smooth camera movement
 RunService.RenderStepped:Connect(function(step)
-	camerasystem:update(step, PlayerEntity)
+	camerasystem:Update(step, PlayerEntity)
 end)
 ]]></ProtectedString>
 					<int64 name="SourceAssetId">-1</int64>
@@ -987,35 +987,21 @@ return {
 	new = function()
 		local entity = {
 			components = {},
-			tags = {},
 			remove = false,
 			loaded = false,
 		}
 
-		function entity:add(component)
+		function entity:AddComponent(component)
 			assert(component.__id ~= nil, "Only Components can be added to entities and Components must have an id")
 			self.components[component.__id] = component
 		end
 
-		function entity:addtag(tag)
-			self.tags[#self.tags + 1] = tag
-		end
-
-		function entity:destroy()
+		function entity:Destroy()
 			self.remove = true
 		end
 
-		function entity:get(id)
+		function entity:GetComponent(id)
 			return self.components[id]
-		end
-
-		function entity:hastag(tag)
-			for i = 1, #self.tags do
-				if self.tags[i] == tag then
-					return true
-				end
-			end
-			return false
 		end
 
 		return entity
@@ -1046,10 +1032,10 @@ local camerasystem = {}
 -- Constants
 local THIRD_PERSON_CAM_OFFSET = CFrame.new(2, 0, 8.5)
 
-function camerasystem:update(step, entity)
+function camerasystem:Update(step, entity)
   -- Querying our components again
-	local Player = entity:get("player")
-	local States = entity:get("state")
+	local Player = entity:GetComponent("player")
+	local States = entity:GetComponent("state")
 
   -- Checking to see if the player is in cam mide
 	if States.inCamMode and States.bindingsloaded then
@@ -1084,11 +1070,11 @@ local keybindsystem = {
 }
 
 -- loading in entities with keybinds into the keybind system
-function keybindsystem:load(entity)
+function keybindsystem:Load(entity)
   -- sice we have a keybind component, we can query that
-  local keybind = entity:get('keybind')
+  local keybind = entity:GetComponent('keybind')
   -- we can also query our states to determine if binds are loaded
-  local states = entity:get('state')
+  local states = entity:GetComponent('state')
   table.insert(self.bindings, keybind)
   states.bindingsloaded = true
 end

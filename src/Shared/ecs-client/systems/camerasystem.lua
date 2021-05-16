@@ -7,8 +7,8 @@ local THIRD_PERSON_CAM_OFFSET = CFrame.new(2, 0, 8.5)
 
 function camerasystem:Update(step, entity)
   -- Querying our components again
-	local Player = entity:get("player")
-	local States = entity:get("state")
+	local Player = entity:GetComponent("player")
+	local States = entity:GetComponent("state")
 
   -- Checking to see if the player is in cam mide
 	if States.inCamMode and States.bindingsloaded then

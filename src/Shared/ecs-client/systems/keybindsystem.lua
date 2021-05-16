@@ -6,7 +6,7 @@ local keybindsystem = {
 }
 
 -- loading in entities with keybinds into the keybind system
-function keybindsystem:load(entity)
+function keybindsystem:Load(entity)
   -- sice we have a keybind component, we can query that
   local keybind = entity:get('keybind')
   -- we can also query our states to determine if binds are loaded

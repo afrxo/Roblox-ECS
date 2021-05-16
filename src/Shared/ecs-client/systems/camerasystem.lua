@@ -5,7 +5,7 @@ local camerasystem = {}
 -- Constants
 local THIRD_PERSON_CAM_OFFSET = CFrame.new(2, 0, 8.5)
 
-function camerasystem:update(step, entity)
+function camerasystem:Update(step, entity)
   -- Querying our components again
 	local Player = entity:get("player")
 	local States = entity:get("state")

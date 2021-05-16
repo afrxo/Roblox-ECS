@@ -22,24 +22,24 @@ local PlayerEntity = entity.new()
 
 -- Here we are adding the player component to the player entity
 -- the player component stores information about the player
-PlayerEntity:add(playerComponent.new(Player))
+PlayerEntity:AddComponent(playerComponent.new(Player))
 
 -- Here we are adding a  stateful-component to the player entity
-PlayerEntity:add(stateComponent.new())
+PlayerEntity:AddComponent(stateComponent.new())
 
 -- Here we are binding creating keybinds
-PlayerEntity:add(keybindComponent.new(Enum.KeyCode.E, function()
+PlayerEntity:AddComponent(keybindComponent.new(Enum.KeyCode.E, function()
   -- we can simply query our player state since by using PlayerEntity:get('state')
   -- and change the state
 
-	local state = PlayerEntity:get("state")
+	local state = PlayerEntity:GetComponent("state")
 	state.inCamMode = not state.inCamMode
 end))
 
 -- Loading our keybinds into the keybind system to avoid any weird behaviours
-keybindsystem:load(PlayerEntity)
+keybindsystem:Load(PlayerEntity)
 
 -- Here we are updating our player entity before every frame for smooth camera movement
 RunService.RenderStepped:Connect(function(step)
-	camerasystem:update(step, PlayerEntity)
+	camerasystem:Update(step, PlayerEntity)
 end)
